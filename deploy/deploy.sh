@@ -1,7 +1,9 @@
 #!/bin/bash
 IMG_PREFIX="itszero/zipkin-"
 NAME_PREFIX="zipkin-"
-PUBLIC_PORT="8080"
+WEB_PORT="8080"
+COLLECTOR_PORT="9410"
+QUERY_PORT="9411"
 ROOT_URL="http://deb.local:$PUBLIC_PORT"
 
 if [[ $CLEANUP == "y" ]]; then
@@ -17,10 +19,10 @@ echo "** Starting zipkin-cassandra"
 docker run -d --name="${NAME_PREFIX}cassandra" "${IMG_PREFIX}cassandra"
 
 echo "** Starting zipkin-collector"
-docker run -d --link="${NAME_PREFIX}cassandra:db" --name="${NAME_PREFIX}collector" "${IMG_PREFIX}collector"
+docker run -d --link="${NAME_PREFIX}cassandra:db" -p 9410:$COLLECTOR_PORT --name="${NAME_PREFIX}collector" "${IMG_PREFIX}collector"
 
 echo "** Starting zipkin-query"
-docker run -d --link="${NAME_PREFIX}cassandra:db" --name="${NAME_PREFIX}query" "${IMG_PREFIX}query"
+docker run -d --link="${NAME_PREFIX}cassandra:db" -p 9411:$QUERY_PORT --name="${NAME_PREFIX}query" "${IMG_PREFIX}query"
 
 echo "** Starting zipkin-web"
-docker run -d --link="${NAME_PREFIX}query:query" -p 8080:$PUBLIC_PORT -e "ROOTURL=${ROOT_URL}" --name="${NAME_PREFIX}web" "${IMG_PREFIX}web"
+docker run -d --link="${NAME_PREFIX}query:query" -p 8080:$WEB_PORT -e "ROOTURL=${ROOT_URL}" --name="${NAME_PREFIX}web" "${IMG_PREFIX}web"
