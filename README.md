@@ -59,6 +59,10 @@ the relevant ports for the Zipkin services:
 If you want to trace code that runs on the host you will need to
 expose and forward the collector port as shown in deploy.sh.
 
+More information on running Docker on OSX can be found here:
+<http://docs.docker.io/installation/mac/>
+
+
 ## Authors
 
 Zero Cho <itszero@gmail.com>
