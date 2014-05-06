@@ -1,5 +1,5 @@
-FROM itszero/zipkin-base
-MAINTAINER Zero Cho "http://itsze.ro"
+FROM lispmeister/zipkin-base
+MAINTAINER Markus Fix "http://deeprecursion.com"
 
 ADD run.sh /usr/local/bin/run
 ENTRYPOINT ["/usr/local/bin/run"]

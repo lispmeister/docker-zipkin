@@ -1,5 +1,5 @@
 FROM debian:sid
-MAINTAINER Zero Cho "http://itsze.ro"
+MAINTAINER Markus Fix "http://deeprecursion.com"
 
 ADD install.sh /usr/local/bin/install
 RUN /usr/local/bin/install

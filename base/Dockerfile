@@ -1,5 +1,5 @@
 FROM debian:sid
-MAINTAINER Zero Cho "http://itsze.ro"
+MAINTAINER Markus Fix "http://deeprecursion.com"
 
 RUN apt-get update
 RUN apt-get install -y scala git curl

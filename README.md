@@ -32,6 +32,35 @@ respective line in deploy.sh to map the port.
 All images with the exception of zipkin-cassandra are sharing a base image:
 zipkin-base. zipkin-base and zipkin-cassandra is built on debian:sid.
 
-## Author
+## Notes (lispmeister)
+
+When booting the images via boot2docker on OSX you will need to make
+sure the guest VM ports are forwarded. Here's an example that forwards
+the relevant ports for the Zipkin services:
+
+    # vm must be powered off 
+    boot2docker stop
+    # collector
+    VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port9410,tcp,127.0.0.1,9410,,9410"
+    VBoxManage modifyvm "boot2docker-vm" --natpf1 "udp-port9410,udp,127.0.0.1,9410,,9410"
+    VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port9900,tcp,127.0.0.1,9900,,9900"
+    # query
+    VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port9411,tcp,127.0.0.1,9411,,9411"
+    # web
+    VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port8080,tcp,127.0.0.1,8080,,8080"
+    # cassandra
+    VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port7000,tcp,127.0.0.1,7000,,7000"
+    VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port7001,tcp,127.0.0.1,7001,,7001"
+    VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port9042,tcp,127.0.0.1,9042,,9042"
+    VBoxManage modifyvm "boot2docker-vm" --natpf1 "tcp-port9160,tcp,127.0.0.1,9160,,9160"
+    # start VM
+    boot2docker start
+
+If you want to trace code that runs on the host you will need to
+expose and forward the collector port as shown in deploy.sh.
+
+## Authors
 
 Zero Cho <itszero@gmail.com>
+
+Markus Fix <lispmeister@gmail.com>
