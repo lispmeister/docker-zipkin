@@ -15,17 +15,11 @@ echo "*** Installing Cassandra"
 apt-get update
 apt-get install -y cassandra procps wget
 
-echo "*** Starting Cassandra"
+echo "*** Patching Cassandra config"
 sed -i s/Xss180k/Xss256k/ /etc/cassandra/cassandra-env.sh
-/etc/init.d/cassandra start
-
-echo "*** Importing Scheme"
-wget https://raw2.github.com/twitter/zipkin/master/zipkin-cassandra/src/schema/cassandra-schema.txt
-cassandra-cli -host localhost -port 9160 -f cassandra-schema.txt
-
-echo "*** Stopping Cassandra"
-/etc/init.d/cassandra stop
-
 mv /etc/cassandra/cassandra.yaml /etc/cassandra/cassandra.default.yaml
+
+echo "*** Fetch Schema"
+wget https://raw2.github.com/twitter/zipkin/master/zipkin-cassandra/src/schema/cassandra-schema.txt -o /etc/cassandra/cassandra-schema.txt
 
 echo "*** Image build complete"
