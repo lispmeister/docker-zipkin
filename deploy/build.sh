@@ -1,5 +1,5 @@
 #!/bin/bash
-PREFIX="itszero/zipkin-"
+PREFIX="lispmeister/zipkin-"
 IMAGES=("base" "cassandra" "collector" "query" "web")
 
 for image in ${IMAGES[@]}; do

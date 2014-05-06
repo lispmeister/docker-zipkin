@@ -1,5 +1,5 @@
 #!/bin/bash
-IMG_PREFIX="itszero/zipkin-"
+IMG_PREFIX="lispmeister/zipkin-"
 NAME_PREFIX="zipkin-"
 WEB_PORT="8080"
 COLLECTOR_PORT="9410"
