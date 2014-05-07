@@ -45,12 +45,16 @@ Once boot2docker is installed:
 
     boot2docker start
 
-Now you're ready to deploy the Docker images:
+Now you're ready to deploy the Docker images. The images are all
+registered at Docker.io
+<https://index.docker.io/u/lispmeister/zipkin-base/>
+and will be downloaded automatically.
 
     cd deploy
     ./deploy.sh
 
-This will fetch the Docker images from the Docker.io index.
+This will fetch the Docker images from the Docker.io index and start
+the containers.
 
 If your want to build the images locally just run this:
 
