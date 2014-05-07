@@ -33,6 +33,29 @@ All images with the exception of zipkin-cassandra are sharing a base image:
 zipkin-base. zipkin-base and zipkin-cassandra is built on debian:sid.
 
 ## Notes (lispmeister)
+You can use these Docker images on OSX with boot2docker. Here's how:
+
+    brew update
+    brew install boot2docker
+
+More information on running Docker on OSX can be found here:
+<http://docs.docker.io/installation/mac/>
+
+Once boot2docker is installed:
+
+    boot2docker start
+
+Now you're ready to deploy the Docker images:
+
+    cd deploy
+    ./deploy.sh
+
+This will fetch the Docker images from the Docker.io index.
+
+If your want to build the images locally just run this:
+
+    cd deploy
+    ./build.sh
 
 When booting the images via boot2docker on OSX you will need to make
 sure the guest VM ports are forwarded. Here's an example that forwards
@@ -59,9 +82,12 @@ the relevant ports for the Zipkin services:
 If you want to trace code that runs on the host you will need to
 expose and forward the collector port as shown in deploy.sh.
 
-More information on running Docker on OSX can be found here:
-<http://docs.docker.io/installation/mac/>
+Once the containers are running you can connect to the collector on
+port 9410 via akka-tracing or other libraries that support Zipkin tracing.
+<https://github.com/levkhomich/akka-tracing>
 
+The Zipkin web interface can be reached at <http://127.0.0.1:8080> and
+will show the traces.
 
 ## Authors
 
