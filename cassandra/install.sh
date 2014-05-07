@@ -20,6 +20,6 @@ sed -i s/Xss180k/Xss256k/ /etc/cassandra/cassandra-env.sh
 mv /etc/cassandra/cassandra.yaml /etc/cassandra/cassandra.default.yaml
 
 echo "*** Fetch Schema"
-wget https://raw2.github.com/twitter/zipkin/master/zipkin-cassandra/src/schema/cassandra-schema.txt -o /etc/cassandra/cassandra-schema.txt
+(cd /etc/cassandra; wget https://raw2.github.com/twitter/zipkin/master/zipkin-cassandra/src/schema/cassandra-schema.txt)
 
 echo "*** Image build complete"
