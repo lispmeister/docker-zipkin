@@ -8,7 +8,7 @@ sed -i -e "s/^rpc_address.*/rpc_address: 0.0.0.0/" $CONFIG
 
 echo "*** Importing Schema"
 /etc/init.d/cassandra start
-wget https://raw2.github.com/twitter/zipkin/master/zipkin-cassandra/src/schema/cassandra-schema.txt
+cassandra-cli -host localhost -port 9160 -f /etc/cassandra/cassandra-schema.txt
 /etc/init.d/cassandra stop
 
 echo "*** Starting Cassandra"
